@@ -58,7 +58,7 @@ const JankenGamePage = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col items-center justify-between py-2">
+    <div className="h-screen-vh flex flex-col items-center justify-between py-2">
       {errorMessage ? (
         <div className="text-red-500 font-semibold text-sm sm:text-xl">{errorMessage}</div>
       ) : (

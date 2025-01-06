@@ -109,7 +109,7 @@ const GamePage = () => {
   }
 
   return (
-    <div className="min-h-screen flex justify-center">
+    <div className="h-screen-vh flex justify-center">
       {user ? (
         <div className="">
           <MainHeader username={username} />

@@ -1,7 +1,7 @@
-const OthelloGame = () => {
+const OthelloGamePage = () => {
   return (
-    <div className-="h-screen-vh">これから作りまーす</div>
+    <div className="h-screen-vh">これから作りまーす</div>
   )
-}
+};
 
-export default OthelloGame;
+export default OthelloGamePage;
