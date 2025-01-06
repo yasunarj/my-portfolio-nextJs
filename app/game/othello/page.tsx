@@ -1,6 +1,6 @@
 const OthelloGame = () => {
   return (
-    <div className-="h-screen">これから作りまーす</div>
+    <div className-="h-screen-vh">これから作りまーす</div>
   )
 }
 

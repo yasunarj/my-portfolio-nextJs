@@ -49,7 +49,7 @@ const JankenGamePage = () => {
 
   if (isSaving) {
     return (
-      <div className="h-screen">
+      <div className="h-screen-vh">
         <div className="h-[80%] flex justify-center items-center text-xl text-gray-600 font-bold">
           データを保存中です
         </div>
