@@ -22,7 +22,7 @@ const JankenMain = () => {
   } = useJankenGame();
   return (
     <div className="flex flex-col items-center justify-between h-[90%] w-full bg-gray-300 py-4 relative">
-      <div className="flex flex-col gap-8 items-center">
+      <div className="flex flex-col gap-6 items-center">
         <div className="flex space-x-12">
           <Card type="back" />
           <Card type="back" />
@@ -36,7 +36,7 @@ const JankenMain = () => {
               <Card type="back" />
             )
           ) : (
-            <div className="border-4 border-dotted rounded-lg p-4 w-24 h-32 flex items-center justify-center text-6xl select-none bg-gray-400"></div>
+            <div className="border-4 border-dotted rounded-lg p-4 w-20 h-24 flex items-center justify-center text-6xl select-none bg-gray-400"></div>
           )}
         </div>
       </div>
@@ -73,12 +73,12 @@ const JankenMain = () => {
 
       <GameMessage guideMessage={guideMessage} />
 
-      <div className="flex flex-col items-center gap-8">
+      <div className="flex flex-col items-center gap-6">
         <div>
           {selectCard ? (
             <Card type={selectCard} />
           ) : (
-            <div className="border-4 border-dotted rounded-lg p-4 w-24 h-32 flex items-center justify-center text-6xl select-none bg-gray-400"></div>
+            <div className="border-4 border-dotted rounded-lg p-4 w-20 h-24 flex items-center justify-center text-6xl select-none bg-gray-400"></div>
           )}
         </div>
         <CardList cards={choicesCard} onClick={handleSelectCard} />
