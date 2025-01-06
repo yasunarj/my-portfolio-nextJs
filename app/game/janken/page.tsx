@@ -49,8 +49,8 @@ const JankenGamePage = () => {
 
   if (isSaving) {
     return (
-      <div className="">
-        <div className="flex-grow flex justify-center items-center text-xl text-gray-600 font-bold">
+      <div className="flex-grow flex flex-col justify-center items-center">
+        <div className="text-xl text-gray-600 font-bold">
           データを保存中です
         </div>
       </div>
