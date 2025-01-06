@@ -21,7 +21,7 @@ const JankenMain = () => {
     handleSelectCard,
   } = useJankenGame();
   return (
-    <div className="flex flex-col items-center justify-between h-[90%] w-full bg-gray-300 py-4 relative">
+    <div className="flex flex-col items-center justify-between h-screen-vh w-full bg-gray-300 py-4 relative">
       <div className="flex flex-col gap-8 items-center">
         <div className="flex space-x-12">
           <Card type="back" />
