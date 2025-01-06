@@ -94,7 +94,7 @@ const GamePage = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="h-screen-vh flex items-center justify-center">
         読み込み中・・・
       </div>
     );
@@ -102,18 +102,18 @@ const GamePage = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-red-500">
+      <div className="h-screen-vh flex items-center justify-center text-red-500">
         {error}
       </div>
     );
   }
 
   return (
-    <div className="h-screen-vh flex justify-center">
+    <div className="flex-grow flex justify-center">
       {user ? (
         <div className="">
           <MainHeader username={username} />
-          <ul className="flex flex-col justify-center text-2xl text-blue-700 font-bold space-y-4 h-[75%]">
+          <ul className="flex flex-col justify-center text-2xl text-blue-700 font-bold space-y-4 h-full">
             {games.map((game) => {
               return (
                 <li

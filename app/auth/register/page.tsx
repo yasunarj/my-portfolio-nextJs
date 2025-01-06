@@ -92,7 +92,7 @@ const RegisterPage = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center h-screen-vh">
+    <div className="flex-grow justify-center items-center h-screen-vh">
       <Card className="w-full max-w-md shadow-2xl">
         <CardHeader>
           <CardTitle className="text-center">新規登録</CardTitle>

@@ -60,7 +60,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="h-screen-vh flex justify-center items-center">
+    <div className="flex-grow flex justify-center items-center">
       <Card className="w-full max-w-md shadow-2xl">
         <CardHeader>
           <CardTitle className="text-center">ログイン</CardTitle>

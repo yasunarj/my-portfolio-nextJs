@@ -49,8 +49,8 @@ const JankenGamePage = () => {
 
   if (isSaving) {
     return (
-      <div className="h-screen-vh">
-        <div className="h-[80%] flex justify-center items-center text-xl text-gray-600 font-bold">
+      <div className="">
+        <div className="flex-grow flex justify-center items-center text-xl text-gray-600 font-bold">
           データを保存中です
         </div>
       </div>
@@ -58,7 +58,7 @@ const JankenGamePage = () => {
   }
 
   return (
-    <div className="h-screen-vh flex flex-col items-center justify-between py-2">
+    <div className="flex-grow flex flex-col items-center justify-between py-2">
       {errorMessage ? (
         <div className="text-red-500 font-semibold text-sm sm:text-xl">{errorMessage}</div>
       ) : (
