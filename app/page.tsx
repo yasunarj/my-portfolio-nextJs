@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 
 const Home = () => {
   return (
-    <div className="h-screen flex flex-col"> 
+    <div className="h-screen-vh flex flex-col"> 
       <Header />
       <div className="flex-grow flex flex-col items-center justify-center space-y-8 h-[80%]">
         <h1 className="text-4xl font-bold text-gray-700 tracking-wider">
