@@ -94,7 +94,7 @@ const GamePage = () => {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         読み込み中・・・
       </div>
     );
@@ -102,14 +102,14 @@ const GamePage = () => {
 
   if (error) {
     return (
-      <div className="h-screen flex items-center justify-center text-red-500">
+      <div className="min-h-screen flex items-center justify-center text-red-500">
         {error}
       </div>
     );
   }
 
   return (
-    <div className="h-screen-vh flex justify-center">
+    <div className="min-h-screen flex justify-center">
       {user ? (
         <div className="">
           <MainHeader username={username} />
