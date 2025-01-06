@@ -1,5 +1,5 @@
 const BlackJackGame = () => {
-  return <div className="h-screen-vh">ブラックジャックはこれから作りまーす</div>;
+  return <div className="min-h-screen h-screen-vh">ブラックジャックはこれから作りまーす</div>;
 };
 
 export default BlackJackGame;
