@@ -26,17 +26,17 @@ const useJankenGame = () => {
     }
     const result = determineWinner(playerCard, cpuCard);
     if(result === "win") {
-      dispatch(setGuideMessage("Win You get 10 points!"));
+      dispatch(setGuideMessage("Win!"));
       dispatch(incrementPoint(10));
     } else if (result === "lose") {
       if(point === 0) {
-        dispatch(setGuideMessage("You lose..."));
+        dispatch(setGuideMessage("lose..."));
         return;
       }
-      dispatch(setGuideMessage("You lose..."));
+      dispatch(setGuideMessage("lose..."));
       dispatch(decrementPoint(10));
     } else {
-      dispatch(setGuideMessage("It's a draw! Try again."));
+      dispatch(setGuideMessage("again!"));
     }
   };
 

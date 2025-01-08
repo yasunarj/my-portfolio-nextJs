@@ -11,7 +11,7 @@ interface JankenState {
 
 const initialState: JankenState = {
   authId: null,
-  guideMessage: "Please choose a card",
+  guideMessage: "",
   cpuCard: null,
   point: 0,
   othelloGamePermission: false,
@@ -46,7 +46,7 @@ const jankenSlice = createSlice({
       state.point -= payload;
     },
     resetGame: (state) => {
-      state.guideMessage = "Please choose a card";
+      state.guideMessage = "";
       state.cpuCard = null;
     },
   },
