@@ -1,16 +1,17 @@
 const games = [
+  {
+    name: "JankenGame",
+    path: "/game/janken"
+  },
   { 
-    name: "オセロゲーム",
+    name: "OthelloGame",
     path: "/game/othello",
   },
   {
-    name: "ブラックジャックゲーム",
+    name: "BlackJackGame",
     path: "/game/blackjack",
   },
-  {
-    name: "ジャンケンゲーム",
-    path: "/game/janken"
-  }
+  
 ];
 
 export { games };

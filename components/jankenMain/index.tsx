@@ -21,7 +21,7 @@ const JankenMain = () => {
     handleSelectCard,
   } = useJankenGame();
   return (
-    <div className="flex flex-col items-center justify-between h-[90%] w-full bg-gray-300 py-4 relative">
+    <div className="flex flex-col items-center justify-between h-[90%] w-full py-4 relative bg-cover bg-center" style={{ backgroundImage: 'url("/images/photo-1464802686167-b939a6910659.avif")' }}>
       <div className="flex flex-col gap-6 items-center">
         <div className="flex space-x-12">
           <Card type="back" />
@@ -46,8 +46,8 @@ const JankenMain = () => {
           (isFinished ? (
             <Button
               className={cn(
-                buttonVariants({ variant: "destructive", size: "lg" }),
-                "my-4"
+                buttonVariants({ size: "lg" }),
+                "my-4 text-md font-semibold"
               )}
               onClick={() => {
                 reset();
@@ -58,8 +58,8 @@ const JankenMain = () => {
           ) : (
             <Button
               className={cn(
-                buttonVariants({ variant: "destructive", size: "lg" }),
-                "my-4"
+                buttonVariants({ size: "lg" }),
+                "my-4 text-md font-semibold"
               )}
               onClick={() => {
                 setIsFinished(true);

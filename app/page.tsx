@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils";
 
 const Home = () => {
   return (
-    <div className="flex-grow flex flex-col"> 
+    <div className="flex-grow flex flex-col bg-cover bg-center" style={{ backgroundImage: "url('/images/photo-1711560217827-dbcb4de4e35d.avif')" }}> 
       <div className="flex-grow flex flex-col items-center justify-center space-y-8 h-[80%]">
-        <h1 className="text-4xl font-bold text-gray-700 tracking-wider">
+        <h1 className="text-4xl font-bold tracking-wider text-white" style={{ fontFamily: "fantasy" }}>
           🚀Next Game🚀
         </h1>
         <Link href="/game">

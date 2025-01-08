@@ -10,7 +10,7 @@ const CardList = ({ cards, onClick }: CardListProps) => {
     <div className="flex space-x-12">
       {cards.map((card) => {
         return (
-          <div key={card} onClick={() => onClick(card)}>
+          <div key={card} onClick={() => onClick(card)} >
             <Card type={card} isPlayer={true} />
           </div>
         );

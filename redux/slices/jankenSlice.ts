@@ -5,6 +5,8 @@ interface JankenState {
   guideMessage: string;
   cpuCard: CardType | null;
   point: number;
+  othelloGamePermission: boolean;
+  blackJackGamePermission: boolean;
 }
 
 const initialState: JankenState = {
@@ -12,6 +14,8 @@ const initialState: JankenState = {
   guideMessage: "Please choose a card",
   cpuCard: null,
   point: 0,
+  othelloGamePermission: false,
+  blackJackGamePermission: false,
 };
 
 const jankenSlice = createSlice({

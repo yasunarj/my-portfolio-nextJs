@@ -60,7 +60,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex-grow flex justify-center items-center">
+    <div className="flex-grow flex justify-center items-center bg-center bg-cover" style={{ backgroundImage: "url('/images/photo-1711560217827-dbcb4de4e35d.avif')" }}>
       <Card className="w-full max-w-md shadow-2xl">
         <CardHeader>
           <CardTitle className="text-center">ログイン</CardTitle>

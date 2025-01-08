@@ -17,6 +17,10 @@ const GamePage = () => {
   const [user, setUser] = useState(null);
   const [username, setUsername] = useState<string>("No one here・・・");
 
+  const unauthorizedNotification = () => {
+    alert("ショップでゲームを購入してください");
+  };
+
   const fetchUserData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
@@ -31,7 +35,7 @@ const GamePage = () => {
 
     try {
       const token = session.session?.access_token;
-  
+
       const response = await fetch("/api/user", {
         method: "GET",
         headers: {
@@ -39,27 +43,28 @@ const GamePage = () => {
           "Content-Type": "application/json",
         },
       });
-  
+
       if (!response.ok) {
-        throw new Error(`エラーが発生しました: ${response.status} ${response.statusText}`)
+        throw new Error(
+          `エラーが発生しました: ${response.status} ${response.statusText}`
+        );
       }
-  
+
       const result = await response.json();
       setUser(result);
       setUsername(result.user);
-    } catch(e: any) {
+    } catch (e: any) {
       setError(e.message);
     } finally {
       setIsLoading(false);
     }
   }, [router]);
 
-
   const fetchPoint = useCallback(async () => {
     try {
       const { data: user, error } = await supabase.auth.getUser();
 
-      if(error) {
+      if (error) {
         return;
       }
 
@@ -74,10 +79,10 @@ const GamePage = () => {
       });
 
       const data = await res.json();
-      if(data.success) {
+      if (data.success) {
         dispatch(setPoint(data.score.value));
       } else {
-        console.error("ポイント取得エラー", data.error)
+        console.error("ポイント取得エラー", data.error);
       }
     } catch (e) {
       console.error("ポイント取得失敗", e);
@@ -89,7 +94,7 @@ const GamePage = () => {
   }, []);
 
   useEffect(() => {
-    fetchPoint()
+    fetchPoint();
   }, [fetchPoint]);
 
   if (isLoading) {
@@ -109,20 +114,40 @@ const GamePage = () => {
   }
 
   return (
-    <div className="flex-grow flex justify-center">
+    <div
+      className="flex-grow flex flex-col items-center justify-between bg-center bg-cover bg-opacity-50 py-4"
+      style={{
+        backgroundImage: "url('/images/photo-1516339901601-2e1b62dc0c45.avif')",
+      }}
+    >
       {user ? (
-        <div className="">
+        <div className="flex flex-col space-y-32">
           <MainHeader username={username} />
-          <ul className="flex flex-col justify-center text-2xl text-blue-700 font-bold space-y-4 h-full">
+          <ul className="flex flex-col justify-center text-2xl text-blue-700 font-bold space-y-12 h-full">
             {games.map((game) => {
               return (
                 <li
                   key={game.name}
                   className="cursor-pointer hover:text-gray-700 hover:underline"
                 >
-                  <Link href={{ pathname: game.path, query: { username } }}>
-                    {game.name}
-                  </Link>
+                  {game.name === "OthelloGame" ||
+                  game.name === "BlackJackGame" ? (
+                    <div
+                      className="text-white line-through"
+                      style={{ fontFamily: "fantasy" }}
+                      onClick={unauthorizedNotification}
+                    >
+                      {game.name}
+                    </div>
+                  ) : (
+                    <Link
+                      className="text-white"
+                      style={{ fontFamily: "fantasy" }}
+                      href={{ pathname: game.path, query: { username } }}
+                    >
+                      {game.name}
+                    </Link>
+                  )}
                 </li>
               );
             })}
@@ -131,6 +156,7 @@ const GamePage = () => {
       ) : (
         <p>ユーザーが見つかりません。</p>
       )}
+      <Link className="text-white text-xl" href="/game/shop">-SHOP-</Link>
     </div>
   );
 };

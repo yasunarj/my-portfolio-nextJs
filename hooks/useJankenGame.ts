@@ -41,6 +41,9 @@ const useJankenGame = () => {
   };
 
   const handleSelectCard = (type: CardType) => {
+    if(isSelected) {
+      return;
+    }
     setSelectCard(type);
     setTimeout(() => {
       isSetSelected(true);
