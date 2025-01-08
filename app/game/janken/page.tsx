@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { resetGame } from "@/redux/slices/jankenSlice";
 import { RootState } from "@/redux/store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const JankenGamePage = () => {
@@ -16,11 +16,15 @@ const JankenGamePage = () => {
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetGame());
+  }, []);
   
   const { point, authId } = useSelector((state: RootState) => state);
   const saveScore = async () => {
-    setIsSaving(true);
     dispatch(resetGame());
+    setIsSaving(true);
     try {
       const res = await fetch("/api/scores", {
         method: "PUT",
@@ -56,6 +60,8 @@ const JankenGamePage = () => {
       </div>
     );
   }
+
+  
 
   return (
     <div className="flex-grow flex flex-col items-center justify-between py-2">
