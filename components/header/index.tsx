@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import { House } from "lucide-react"
 
 const Header = () => {
   const router = useRouter();
@@ -59,7 +60,10 @@ const Header = () => {
   return (
     <div className="bg-gray-800 text-white p-4 flex justify-between items-center h-[54px]">
       <Link href="/">
-        <h2 className="text-xl font-semibold">Nari Game</h2>
+        <h2 className="flex space-x-1 items-center text-xl font-semibold">
+          <House size={24} />
+          <span>Nari Game</span>
+        </h2>
       </Link>
       <div>
         {isLoggedIn ? (

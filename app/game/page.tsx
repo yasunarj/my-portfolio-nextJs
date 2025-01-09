@@ -151,12 +151,16 @@ const GamePage = () => {
                 </li>
               );
             })}
+            <li className="text-white font-semibold text-sm w-full text-end" style={{ fontFamily: "fantasy" }}>Player Ranking</li>
           </ul>
         </div>
       ) : (
         <p>ユーザーが見つかりません。</p>
       )}
-      <Link className="text-white text-xl" href="/game/shop">-SHOP-</Link>
+
+      <Link className="text-white text-xl" href="/game/shop">
+        -SHOP-
+      </Link>
     </div>
   );
 };

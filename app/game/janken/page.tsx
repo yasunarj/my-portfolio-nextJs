@@ -47,7 +47,6 @@ const JankenGamePage = () => {
       setErrorMessage(e.message);
     } finally {
       setIsSaving(false);
-      
     }
   };
 
