@@ -17,13 +17,13 @@ const games: Game[] = [
   {
     id: 'othello',
     name: 'オセロ',
-    price: 10,
+    price: 100,
     description: '定番の戦略ボードゲーム'
   },
   {
     id: 'blackjack',
     name: 'ブラックジャック',
-    price: 10,
+    price: 50,
     description: '人気のカードゲーム'
   }
 ];

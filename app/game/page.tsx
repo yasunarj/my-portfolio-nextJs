@@ -23,7 +23,7 @@ const games = [
     id: 'blackjack',
     title: 'ブラックジャック',
     description: '定番カジノゲーム！21を目指せ',
-    price: 100,
+    price: 50,
     icon: '♠️♦️',
     color: 'from-green-500 to-green-600',
     free: false
@@ -32,7 +32,7 @@ const games = [
     id: 'othello',
     title: 'オセロ',
     description: '頭脳戦の王道！AI対戦で腕を磨こう',
-    price: 200,
+    price: 100,
     icon: '⚫️ ⚪️',
     color: 'from-purple-500 to-purple-600',
     free: false
