@@ -303,27 +303,32 @@ return (
           </button>
         </div>
 
-        <div className="flex justify-center">
-          <div className="inline-block bg-green-700 p-2 md:p-4 rounded-lg shadow-xl">
+        <div className="w-full lg:w-2/3 flex justify-center">
+          <div className="w-full max-w-[500px] aspect-square bg-green-700 p-1 md:p-2 rounded-lg shadow-xl">
             {board.map((row, i) => (
-              <div key={i} className="flex">
+              <div key={i} className="flex h-[12.5%]">
                 {row.map((cell, j) => (
                   <div
                     key={j}
                     onClick={() => currentPlayer === 1 && makeMove(i, j)}
-                    className={`w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 border border-green-900 
+                    className={`
+                      w-[12.5%] h-full border border-green-900 
                       flex items-center justify-center cursor-pointer
-                      ${currentPlayer === 1 && isValidMove(board, i, j, 1) ? 'hover:bg-green-600' : ''}`}
+                      ${currentPlayer === 1 && isValidMove(board, i, j, 1) ? 'hover:bg-green-600' : ''}
+                    `}
                   >
                     {cell !== 0 && (
-                      <div className={`w-6 h-6 md:w-10 md:h-10 lg:w-14 lg:h-14 rounded-full 
-                        transform transition-all duration-300
-                        ${cell === 1 ? 'bg-black' : 'bg-white'} shadow-lg
-                        ${currentPlayer === 1 ? 'hover:scale-105' : ''}`}
+                      <div 
+                        className={`
+                          w-[80%] h-[80%] rounded-full 
+                          transform transition-all duration-300
+                          ${cell === 1 ? 'bg-black' : 'bg-white'} shadow-lg
+                          ${currentPlayer === 1 ? 'hover:scale-105' : ''}
+                        `}
                       />
                     )}
                     {currentPlayer === 1 && cell === 0 && isValidMove(board, i, j, 1) && (
-                      <div className="w-3 h-3 rounded-full bg-green-500 opacity-50" />
+                      <div className="w-[30%] h-[30%] rounded-full bg-green-500 opacity-50" />
                     )}
                   </div>
                 ))}
