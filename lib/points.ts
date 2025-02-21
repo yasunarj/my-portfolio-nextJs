@@ -11,7 +11,11 @@ export async function savePointToDatabase(authId: string, point: number) {
     const { error } = await supabase
       .from('scores')
       .upsert(
-        { auth_id: authId, value: point },
+        { 
+          auth_id: authId, 
+          value: point,
+          updated_at: new Date().toISOString()
+        },
         { onConflict: 'auth_id' }
       );
 
@@ -30,8 +34,27 @@ export async function savePointToDatabase(authId: string, point: number) {
     return true;
   } catch (e) {
     // エラーオブジェクトの型を確認して適切に処理
-    const errorMessage = e instanceof Error ? e.message : 'Unknown error';
-    console.warn('Unexpected error in savePointToDatabase:', errorMessage);
+    console.error('Error in savePointToDatabase:', e);
     return false;
+  }
+}
+
+export async function getPointFromDatabase(authId: string): Promise<number | null> {
+  try {
+    const { data, error } = await supabase
+      .from('scores')
+      .select('value')
+      .eq('auth_id', authId)
+      .single();
+
+    if (error) {
+      console.warn('Error fetching points:', error);
+      return null;
+    }
+
+    return data?.value ?? null;
+  } catch (e) {
+    console.error('Error in getPointFromDatabase:', e);
+    return null;
   }
 } 

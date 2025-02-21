@@ -12,9 +12,7 @@ import {
 } from "@/redux/slices/jankenSlice";
 import { RootState } from "@/redux/store";
 import { useEffect } from "react";
-import Link from "next/link";
-import { savePointToDatabase } from '@/lib/points';
-import { supabase } from "@/lib/supabaseClient";
+import { useGamePoints } from "@/hooks/useGamePoints";
 
 // ジャンケンの手を定義
 const hands = ['✊', '✌️', '✋'] as const;
@@ -24,8 +22,9 @@ const JankenGamePage = () => {
   const searchParams = useSearchParams();
   const username = searchParams.get("username") || "ゲスト";
   const dispatch = useDispatch();
-
-  const { playerHand, computerHand, isShowingResult, point } = useSelector((state: RootState) => state.janken);
+  const point = useSelector((state: RootState) => state.janken.point);
+  const { savePointsAndReload } = useGamePoints();
+  const { playerHand, computerHand, isShowingResult } = useSelector((state: RootState) => state.janken);
 
   useEffect(() => {
     dispatch(resetGame());
@@ -59,18 +58,9 @@ const JankenGamePage = () => {
 
   const handleReturnToGameSelect = async () => {
     try {
-      const { data: user } = await supabase.auth.getUser();
-      if (!user?.user?.id) {
-        console.warn('User not found');
-        return;
-      }
-
-      const success = await savePointToDatabase(user.user.id, point);
-      if (!success) {
-        console.warn('Failed to save points');
-      }
+      await savePointsAndReload(point);
     } catch (e) {
-      console.warn('Error in handleReturnToGameSelect:', e);
+      console.error('Failed to save points:', e);
     }
   };
 
@@ -176,14 +166,13 @@ const JankenGamePage = () => {
         </div>
 
         <div className="text-center mt-8">
-          <Link 
-            href="/game"
+          <button 
             onClick={handleReturnToGameSelect}
             className="inline-block px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg 
               hover:bg-white/30 transition-all duration-300"
           >
             ゲーム選択に戻る
-          </Link>
+          </button>
         </div>
       </div>
     </div>

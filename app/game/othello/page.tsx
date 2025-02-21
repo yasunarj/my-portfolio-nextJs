@@ -7,11 +7,13 @@ import Link from 'next/link';
 import { getAIMove, isValidMove } from './ai';
 import { incrementPoint, decrementPoint } from "@/redux/slices/jankenSlice";
 import { Cell } from './types';
+import { useGamePoints } from '@/hooks/useGamePoints';
 
 export default function OthelloPage() {
   const dispatch = useDispatch();
   const purchasedGames = useSelector((state: RootState) => state.games.purchasedGames);
   const point = useSelector((state: RootState) => state.janken.point);
+  const { savePointsAndReload } = useGamePoints();
   
   const [board, setBoard] = useState<Cell[][]>(initializeBoard());
   const [currentPlayer, setCurrentPlayer] = useState<1 | 2>(2);
@@ -218,6 +220,14 @@ const makeMove = useCallback((row: number, col: number) => {
     setGameOver(false);
   }
 
+  const handleReturnToGameSelect = async () => {
+    try {
+      await savePointsAndReload(point);
+    } catch (e) {
+      console.error('Failed to save points:', e);
+    }
+  };
+
   if (!purchasedGames.includes('othello')) {
     return (
       <div className="min-h-screen-vh container mx-auto p-4 text-center">
@@ -247,12 +257,12 @@ return (
           <span className="text-lg text-white text-center">
             {gameOver ? "ゲーム終了" : (currentPlayer === 1 ? 'あなたの番' : 'コンピュータの番')}
           </span>
-          <Link 
-            href="/game" 
+          <button 
+            onClick={handleReturnToGameSelect}
             className="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-lg hover:bg-white/30"
           >
             ゲーム選択に戻る
-          </Link>
+          </button>
         </div>
       </div>
 

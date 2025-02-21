@@ -5,6 +5,7 @@ import { RootState } from '@/redux/store';
 import { incrementPoint, decrementPoint } from "@/redux/slices/jankenSlice";
 import { useState } from 'react';
 import Link from 'next/link';
+import { useGamePoints } from '@/hooks/useGamePoints';
 
 type Card = {
   suit: string;
@@ -54,6 +55,7 @@ export default function BlackjackPage() {
   const [isFlipping, setIsFlipping] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [gameResult, setGameResult] = useState<string>('');
+  const { savePointsAndReload } = useGamePoints();
 
   const createDeck = () => {
     const suits = ['♠', '♥', '♦', '♣'];
@@ -256,6 +258,14 @@ export default function BlackjackPage() {
     </div>
   );
 
+  const handleReturnToGameSelect = async () => {
+    try {
+      await savePointsAndReload(point);
+    } catch (e) {
+      console.error('Failed to save points:', e);
+    }
+  };
+
   if (!purchasedGames.includes('blackjack')) {
     return (
       <div className="min-h-screen container mx-auto p-4 text-center">
@@ -283,13 +293,13 @@ export default function BlackjackPage() {
             <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg">
               <span className="text-2xl font-bold text-white">{point}P</span>
             </div>
-            <Link 
-              href="/game" 
+            <button 
+              onClick={handleReturnToGameSelect}
               className="px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg 
                 hover:bg-white/30 transition-all duration-300"
             >
               ゲーム選択に戻る
-            </Link>
+            </button>
           </div>
         </div>
 

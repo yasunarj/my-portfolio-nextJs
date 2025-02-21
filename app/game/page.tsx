@@ -2,12 +2,11 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { supabase } from "@/lib/supabaseClient";
 import Link from "next/link";
-import { setAuthId, setPoint } from "@/redux/slices/jankenSlice";
-import { savePointToDatabase } from '@/lib/points';
+import { useGamePoints } from '@/hooks/useGamePoints';
 
 const games = [
   {
@@ -41,13 +40,14 @@ const games = [
 
 const GamePage = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [username, setUsername] = useState<string>("ゲスト");
   const purchasedGames = useSelector((state: RootState) => state.games.purchasedGames);
   const point = useSelector((state: RootState) => state.janken.point);
+  const { fetchPoints } = useGamePoints();
 
+  // セッションチェック
   const checkSession = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -66,53 +66,11 @@ const GamePage = () => {
     }
   }, [router]);
 
-  const fetchPoint = useCallback(async () => {
-    try {
-      const { data: user } = await supabase.auth.getUser();
-      if (!user?.user) {
-        console.log('ユーザーが見つかりません');
-        return;
-      }
-
-      const authId = user.user.id;
-      if (!authId) {
-        console.log('認証IDが見つかりません');
-        return;
-      }
-
-      dispatch(setAuthId(authId));
-
-      // データベースからポイントを取得
-      const { data: scoreData, error } = await supabase
-        .from('scores')
-        .select('value')
-        .eq('auth_id', authId)
-        .single();
-
-      if (error) {
-        console.warn('Score fetch error:', error.message);
-        return;
-      }
-
-      if (scoreData) {
-        dispatch(setPoint(scoreData.value));
-      } else {
-        // 新規ユーザーの場合は初期ポイントを設定
-        dispatch(setPoint(100));
-        await savePointToDatabase(authId, 100);
-      }
-    } catch (e) {
-      console.error("Error in fetchPoint:", e);
-      dispatch(setPoint(0));
-    }
-  }, [dispatch]);
-
   // ユーザー情報を取得する関数
   const fetchUserData = useCallback(async () => {
     try {
       const { data: user } = await supabase.auth.getUser();
       if (user?.user?.email) {
-        // メールアドレスからユーザー名を生成（@より前の部分を使用）
         const name = user.user.email.split('@')[0];
         setUsername(name);
       }
@@ -121,14 +79,19 @@ const GamePage = () => {
     }
   }, []);
 
+  // 初期データ取得とリロードチェック
   useEffect(() => {
     checkSession();
-    fetchUserData(); // ユーザー情報を取得
-  }, [checkSession, fetchUserData]);
+    fetchUserData();
+    fetchPoints();
 
-  useEffect(() => {
-    fetchPoint();
-  }, [fetchPoint]);
+    // リロードフラグをチェック
+    const shouldReload = sessionStorage.getItem('shouldReload');
+    if (shouldReload === 'true') {
+      sessionStorage.removeItem('shouldReload');
+      window.location.reload();
+    }
+  }, [checkSession, fetchUserData, fetchPoints]);
 
   if (isLoading) {
     return (
