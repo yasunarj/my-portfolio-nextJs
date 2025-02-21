@@ -16,7 +16,7 @@ export default function OthelloPage() {
   const { savePointsAndReload } = useGamePoints();
   
   const [board, setBoard] = useState<Cell[][]>(initializeBoard());
-  const [currentPlayer, setCurrentPlayer] = useState<1 | 2>(2);
+  const [currentPlayer, setCurrentPlayer] = useState<1 | 2>(1);
   const [gameOver, setGameOver] = useState(false);
   const [passMessage, setPassMessage] = useState('');
   const [gameResult, setGameResult] = useState<string | null>(null)
@@ -216,7 +216,7 @@ const makeMove = useCallback((row: number, col: number) => {
   // リセットボタンの処理も修正
   function resetGame() {
     setBoard(initializeBoard());
-    setCurrentPlayer(2); // コンピュータから開始
+    setCurrentPlayer(1); // プレイヤーから開始するように変更
     setGameOver(false);
   }
 
