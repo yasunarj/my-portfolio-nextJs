@@ -1,17 +1,20 @@
-const games = [
+export const games = [
   {
-    name: "JankenGame",
-    path: "/game/janken"
-  },
-  { 
-    name: "OthelloGame",
-    path: "/game/othello",
+    id: 'janken',
+    name: 'ジャンケン',
+    path: '/game/janken',
+    description: 'ポイントを獲得してゲームを購入しよう！'
   },
   {
-    name: "BlackJackGame",
-    path: "/game/blackjack",
+    id: 'othello',
+    name: 'オセロ',
+    path: '/game/othello',
+    description: '定番の戦略ボードゲーム'
   },
-  
-];
-
-export { games };
+  {
+    id: 'blackjack',
+    name: 'ブラックジャック',
+    path: '/game/blackjack',
+    description: '人気のカードゲーム'
+  }
+] as const;

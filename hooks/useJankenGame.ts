@@ -12,7 +12,7 @@ import { determineWinner } from "@/lib/jankenLogic";
 
 const useJankenGame = () => {
   const { guideMessage, cpuCard, point } = useSelector(
-    (state: RootState) => state
+    (state: RootState) => state.janken
   );
   const dispatch = useDispatch();
 
